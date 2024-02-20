@@ -1,0 +1,173 @@
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+  &_info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  &_message{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    &_glitch{
+      position: relative;
+      color: var(--txt-color);
+      font-size: 100px;
+      animation: glitch 5s 5s infinite;
+    }
+    &_glitch::before{
+      content: attr(data-text);
+      position: absolute;
+      left: -2px;
+      text-shadow: -5px 0 rgb(209, 123, 255);
+      overflow: hidden;
+      top: 0;
+      animation: noise-1 8s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
+    }
+    &_glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 2px;
+      text-shadow: -5px 0 rgb(215, 240, 125);
+      overflow: hidden;
+      top: 0;
+      animation: noise-2 5s linear infinite alternate-reverse, glitch 5s 5.05s infinite;
+    }
+    @keyframes glitch{
+      1%{
+        transform: rotatex(10deg) skewX(90deg);
+      }
+      2%{
+        transform: rotateX(0deg) skewX(0deg);
+      }
+    }
+    @keyframes noise-1 {
+      $steps: 30;
+      @for $i from 1 through $steps {
+        #{percentage($i*(1/$steps))}{
+          $top:random(100);
+          $bottom: random(101 - $top);
+          clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+      }
+    }
+    @keyframes noise-2 {
+      $steps: 30;
+      @for $i from 0 through $steps {
+        #{percentage($i*(1/$steps))} {
+          $top: random(100);
+          $bottom: random(101 - $top);
+          clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+      }
+    }
+    span{
+      display: block;
+      max-width: 650px;
+      padding: 40px 0 0 20px;
+      color: var(--txt-color);
+      line-height: 1.2;
+      font-size: 15px;
+    }
+  }
+  &_projects{
+    margin-top: 30px;
+    position: relative;
+    h2{
+      color: var(--txt-color);
+      font-size: 35px;
+    }
+    &_items{
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      margin-top: 18px;
+      a{
+        max-width: 110px;
+        padding-top: 20px;
+        color: var(--txt-color);
+        font-size: larger;
+        list-style: none;
+        border-bottom: 2px solid var(--liner-color);
+        transition: .9s;
+        text-align: center;
+      }
+      a.uber:hover{
+        color: #19a8c3;
+        transform: scale(1.5);
+      }
+      a.course-wp:hover{
+        color: #f9bf3b;
+        transform: scale(1.5);
+      }
+      a.pulse-s:hover{
+        color: #fff;
+        transform: scale(1.5);
+      }
+      a.chameleon:hover{
+        color: #9b47e5;
+        transform: scale(1.5);
+      }
+
+    }
+    button{
+      margin-top: 20px;
+      color: var(--txt-color);
+      font-size: larger;
+      padding: 0;
+      border: none;
+      border-bottom: 2px solid var(--liner-color);
+      
+    }
+    &_skills{
+      max-width: 755px;
+      visibility: hidden;
+      z-index: 1;
+      position: absolute;
+      left: 10rem;
+      .active {
+        left: 0;
+        visibility: visible;
+        opacity: 1;
+      }
+      &_stuff{
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        border: 2px solid #dddd;
+        color: rgb(26, 229, 195);
+        
+        ul{
+          margin: 0;
+          padding: 10px;
+          font-size: 20px;
+          li{
+            i{
+              padding-left: 10px;
+            }
+          }
+        }
+        &_close{
+          position: absolute;
+          width: 28px;
+          height: 28px;
+          border-radius: 100%;
+          top: 6px;
+          left: 6px;
+          font-size: 25px;
+          color: #fff;
+          cursor: pointer;
+        }
+        &_close:hover{
+          i{
+            color: rgba(224, 63, 63, 0.841);
+          }
+        }
+      }
+    }
+  }
+}
+
